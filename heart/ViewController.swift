@@ -9,17 +9,68 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var rightConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var leftConstraint: NSLayoutConstraint!
+    
+    var continueAnimation = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        largeHeart()
+    }
+    
+    func largeHeart() {
+        
+        if continueAnimation{
+            self.topConstraint.isActive = false
+            self.rightConstraint.isActive = false
+            self.bottomConstraint.isActive = false
+            self.leftConstraint.isActive = false
+        }
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: .curveEaseInOut,
+            animations: {
+                self.view.layoutIfNeeded()
+        },
+            completion: { finished in
+                self.smallHeart()
+        })
+    }
+    
+    func smallHeart(){
+        topConstraint.isActive = true
+        rightConstraint.isActive = true
+        bottomConstraint.isActive = true
+        leftConstraint.isActive = true
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: .curveEaseInOut,
+            animations: {
+                self.view.layoutIfNeeded()
+        },
+            completion: { finished in
+                if !self.continueAnimation{
+                    return
+                }
+                self.largeHeart()
+        })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func startAndStop(_ sender: UIButton) {
+        continueAnimation = !continueAnimation
+        
+        if continueAnimation {
+            largeHeart()
+        }
     }
-
-
+    
 }
 
