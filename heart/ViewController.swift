@@ -23,12 +23,8 @@ class ViewController: UIViewController {
     }
     
     func largeHeart() {
-        
         if continueAnimation{
-            self.topConstraint.isActive = false
-            self.rightConstraint.isActive = false
-            self.bottomConstraint.isActive = false
-            self.leftConstraint.isActive = false
+            activeDesactiveConstraint(active: false)
         }
         
         UIView.animate(
@@ -44,10 +40,7 @@ class ViewController: UIViewController {
     }
     
     func smallHeart(){
-        topConstraint.isActive = true
-        rightConstraint.isActive = true
-        bottomConstraint.isActive = true
-        leftConstraint.isActive = true
+        activeDesactiveConstraint(active: true)
         
         UIView.animate(
             withDuration: 0.5,
@@ -62,6 +55,13 @@ class ViewController: UIViewController {
                 }
                 self.largeHeart()
         })
+    }
+    
+    func activeDesactiveConstraint(active: Bool){
+        topConstraint.isActive = active
+        rightConstraint.isActive = active
+        bottomConstraint.isActive = active
+        leftConstraint.isActive = active
     }
 
     @IBAction func startAndStop(_ sender: UIButton) {
