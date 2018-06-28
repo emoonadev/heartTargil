@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    /*
+     For this heartbeat exercise, I decided to choose the technique based on the layout by disabling some constraint.
+     I gave constraints to the heart at the initial size, and also constraints at a larger size,
+     I gave as priority to the constraint of the larger size of the low priority
+     */
+    
     @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet var rightConstraint: NSLayoutConstraint!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
